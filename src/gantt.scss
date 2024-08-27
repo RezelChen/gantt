@@ -30,6 +30,7 @@ $dark-blue: #2c94ec !default;
     top: 0;
     left: 0;
     z-index: 10;
+    overflow: hidden;
   }
 
   .lower-text,
@@ -156,6 +157,7 @@ $dark-blue: #2c94ec !default;
 
   .holiday-highlight {
     fill: $holiday-color;
+    pointer-events: none;
   }
 
   .arrow {

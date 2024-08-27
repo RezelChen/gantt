@@ -75,6 +75,7 @@
   top: 0;
   left: 0;
   z-index: 10;
+  overflow: hidden;
 }
 .gantt-container .lower-text,
 .gantt-container .upper-text {
@@ -173,6 +174,7 @@
 }
 .gantt .holiday-highlight {
   fill: #F9FAFA;
+  pointer-events: none;
 }
 .gantt .arrow {
   fill: none;
