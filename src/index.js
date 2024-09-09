@@ -619,10 +619,12 @@ export default class Gantt {
     ) {
       // Used as we must find the _end_ of session if view is not Day
       const { x: left, date } = this.computeGridHighlightDimensions(this.options.view_mode)
+      let $today = document.getElementById(date_utils.format(date).replaceAll(' ', '_'))
+      if (!$today) { return }
+
       const top = this.options.header_height + this.options.padding / 2;
       const height = (this.options.bar_height + this.options.padding) * this.tasks.length;
       this.$current_highlight = this.create_el({ top, left, height, classes: 'current-highlight', append_to: this.$container })
-      let $today = document.getElementById(date_utils.format(date).replaceAll(' ', '_'))
 
       $today.classList.add('current-date-highlight')
       $today.style.top = +$today.style.top.slice(0, -2) - 4 + 'px'

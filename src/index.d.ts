@@ -42,7 +42,7 @@ declare namespace Gantt {
         on_view_change?: ((mode: viewMode) => void);
         on_hover?: ((task: EnrichedTask) => void);
         popup?: false | ((task: EnrichedTask) => string);
-        view_mode_padding?: Record<viewModeKey, string>;
+        view_mode_padding?: Partial<Record<viewModeKey, string>>;
         scroll_to?: string;
         view_mode_select?: boolean;
         today_button?: boolean;
