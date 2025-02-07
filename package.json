@@ -1,9 +1,8 @@
 {
     "name": "frappe-gantt-fork",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "A simple, modern, interactive gantt library for the web",
     "main": "src/index.js",
-    "types": "src/index.d.ts",
     "scripts": {
         "dev": "vite",
         "build-dev": "vite build --watch",
@@ -25,7 +24,8 @@
         ".": {
             "require": "./dist/frappe-gantt.umd.js",
             "import": "./dist/frappe-gantt.es.js",
-            "style": "./dist/frappe-gantt.css"
+            "style": "./dist/frappe-gantt.css",
+            "types": "./src/index.d.ts"
         }
     },
     "keywords": [
