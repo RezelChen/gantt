@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import libCss from 'vite-plugin-libcss';
 
 export default defineConfig({
     build: {
@@ -17,5 +18,6 @@ export default defineConfig({
         },
     },
     output: { interop: 'auto' },
-    server: { watch: { include: ['dist/*', 'src/*'] } }
+    server: { watch: { include: ['dist/*', 'src/*'] } },
+    plugins: [libCss()],
 });

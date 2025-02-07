@@ -1,9 +1,9 @@
 {
     "name": "frappe-gantt-fork",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "A simple, modern, interactive gantt library for the web",
     "main": "src/index.js",
-    "type": "module",
+    "types": "src/index.d.ts",
     "scripts": {
         "dev": "vite",
         "build-dev": "vite build --watch",
@@ -48,7 +48,8 @@
         "eslint-plugin-prettier": "^2.6.0",
         "postcss-nesting": "^12.1.2",
         "prettier": "3.2.5",
-        "vite": "^5.2.10"
+        "vite": "^5.2.10",
+        "vite-plugin-libcss": "^1.1.1"
     },
     "eslintIgnore": [
         "dist"
