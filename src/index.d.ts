@@ -14,12 +14,13 @@ declare class Gantt {
 declare namespace Gantt {
     interface Task {
         id: string;
-        name: string;
         start: string | Date;
-        end: string | Date;
-        progress: number;
-        dependencies: string;
-        custom_class?: string | undefined;
+        duration?: string;
+        end?: string | Date;
+        name?: string;
+        progress?: number;
+        dependencies?: string | string[];
+        custom_class?: string;
     }
 
     interface EnrichedTask extends Task {
