@@ -62,7 +62,9 @@ declare namespace Gantt {
         view_mode?: viewMode;
         view_mode_select?: boolean;
 
-        popup?: false | (({ task: EnrichedTask }) => string | false | void);
+        popup?:
+            | false
+            | ((params: { task: EnrichedTask }) => string | false | void);
 
         on_hover?: (task: EnrichedTask) => void;
         on_click?: (task: EnrichedTask) => void;
