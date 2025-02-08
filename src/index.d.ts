@@ -1,7 +1,11 @@
 export = Gantt;
 
 declare class Gantt {
-    constructor(wrapper: string | HTMLElement | SVGElement, tasks: Gantt.Task[], options?: Gantt.Options);
+    constructor(
+        wrapper: string | HTMLElement | SVGElement,
+        tasks: Gantt.Task[],
+        options?: Gantt.Options,
+    );
 
     change_view_mode(mode: Gantt.viewMode): void;
     refresh(tasks: Gantt.Task[]): void;
@@ -11,8 +15,8 @@ declare namespace Gantt {
     interface Task {
         id: string;
         name: string;
-        start: string;
-        end: string;
+        start: string | Date;
+        end: string | Date;
         progress: number;
         dependencies: string;
         custom_class?: string | undefined;
@@ -25,33 +29,66 @@ declare namespace Gantt {
         invalid?: boolean | undefined;
     }
 
-    interface Options {
-        header_height?: number;
-        column_width?: number;
-        step?: number;
-        bar_height?: number;
-        bar_corner_radius?: number;
-        arrow_curve?: number;
-        padding?: number;
-        view_mode?: viewMode;
-        language?: string;
-        on_click?: ((task: EnrichedTask) => void);
-        on_double_click?: ((task: EnrichedTask) => void);
-        on_date_change?: ((task: EnrichedTask, start: Date, end: Date) => void)
-        on_progress_change?: ((task: EnrichedTask, progress: number) => void);
-        on_view_change?: ((mode: viewMode) => void);
-        on_hover?: ((task: EnrichedTask) => void);
-        popup?: false | ((task: EnrichedTask) => string);
-        view_mode_padding?: Partial<Record<viewModeKey, string>>;
-        scroll_to?: string;
-        view_mode_select?: boolean;
-        today_button?: boolean;
-        lines?: 'both' | 'vertical' | 'horizontal';
+    interface Holiday {
+        name: string;
+        date: string | Date;
     }
 
-    type viewMode = "Quarter Day" | "Half Day" | "Day" | "Week" | "Month" | "Year";
+    interface Options {
+        arrow_curve?: number;
+        auto_move_label?: boolean;
+        bar_corner_radius?: number;
+        bar_height?: number;
+        container_height?: number;
+        column_width?: number;
+        date_format?: string;
+        upper_header_height?: number;
+        lower_header_height?: number;
+        snap_at?: string;
+        infinite_padding?: boolean;
+        holidays?: Record<string, 'weekend' | (Holiday | Date | string)[]>;
+        ignore?: 'weekend' | (Date | string)[];
+        language?: string;
+        lines?: 'none' | 'both' | 'vertical' | 'horizontal';
+        move_dependencies?: boolean;
+        padding?: number;
+        popup_on?: 'hover' | 'click';
+        readonly_progress?: boolean;
+        readonly_dates?: boolean;
+        readonly?: boolean;
+        scroll_to?: 'start' | 'end' | 'today' | Date | string;
+        show_expected_progress?: boolean;
+        today_button?: boolean;
+        view_mode?: viewMode;
+        view_mode_select?: boolean;
 
-    type viewModeKey = "QUARTER_DAY" | "HALF_DAY" | "DAY" | "WEEK" | "MONTH" | "YEAR";
+        popup?: false | (({ task: EnrichedTask }) => string | false | void);
+
+        on_hover?: (task: EnrichedTask) => void;
+        on_click?: (task: EnrichedTask) => void;
+        on_double_click?: (task: EnrichedTask) => void;
+        on_date_change?: (task: EnrichedTask, start: Date, end: Date) => void;
+        on_progress_change?: (task: EnrichedTask, progress: number) => void;
+        on_view_change?: (mode: viewMode) => void;
+    }
+
+    type viewMode =
+        | 'Hour'
+        | 'Quarter Day'
+        | 'Half Day'
+        | 'Day'
+        | 'Week'
+        | 'Month'
+        | 'Year';
+
+    type viewModeKey =
+        | 'HOUR'
+        | 'QUARTER_DAY'
+        | 'HALF_DAY'
+        | 'DAY'
+        | 'WEEK'
+        | 'MONTH'
+        | 'YEAR';
 
     const VIEW_MODE: Record<viewModeKey, viewMode>;
 }
