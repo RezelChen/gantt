@@ -7,7 +7,8 @@ declare class Gantt {
         options?: Gantt.Options,
     );
 
-    change_view_mode(mode: Gantt.viewMode): void;
+    options: Gantt.Options;
+    change_view_mode(mode: Gantt.ViewModeName): void;
     refresh(tasks: Gantt.Task[]): void;
 }
 
@@ -60,7 +61,7 @@ declare namespace Gantt {
         scroll_to?: 'start' | 'end' | 'today' | Date | string;
         show_expected_progress?: boolean;
         today_button?: boolean;
-        view_mode?: viewMode;
+        view_mode?: ViewModeName;
         view_mode_select?: boolean;
 
         popup?:
@@ -72,10 +73,20 @@ declare namespace Gantt {
         on_double_click?: (task: EnrichedTask) => void;
         on_date_change?: (task: EnrichedTask, start: Date, end: Date) => void;
         on_progress_change?: (task: EnrichedTask, progress: number) => void;
-        on_view_change?: (mode: viewMode) => void;
+        on_view_change?: (mode: ViewModeName) => void;
     }
 
-    type viewMode =
+    interface ViewMode {
+        name: ViewModeName;
+        padding: string | string[];
+        step: string;
+        date_format: string;
+        lower_text: string | ((d: Date, ld: Date, lang: string) => string);
+        upper_text: string | ((d: Date, ld: Date, lang: string) => string);
+        upper_text_frequency: number;
+    }
+
+    type ViewModeName =
         | 'Hour'
         | 'Quarter Day'
         | 'Half Day'
@@ -83,15 +94,4 @@ declare namespace Gantt {
         | 'Week'
         | 'Month'
         | 'Year';
-
-    type viewModeKey =
-        | 'HOUR'
-        | 'QUARTER_DAY'
-        | 'HALF_DAY'
-        | 'DAY'
-        | 'WEEK'
-        | 'MONTH'
-        | 'YEAR';
-
-    const VIEW_MODE: Record<viewModeKey, viewMode>;
 }
